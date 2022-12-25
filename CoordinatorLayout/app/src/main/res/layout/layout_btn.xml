@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/constraint2"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_sign_up"
+        app:layout_constraintBottom_toTopOf="@+id/tvText"
+        app:layout_constraintLeft_toLeftOf="@+id/tvText"
+        style="@style/Base.ThemeOverlay.Material3.AutoCompleteTextView."
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:text="회원가입"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tvText"
+        app:layout_constraintBottom_toTopOf="@+id/layout"
+        app:layout_constraintLeft_toLeftOf="@+id/layout"
+        android:layout_marginBottom="100dp"
+        style="@style/Base.ThemeOverlay.Material3.AutoCompleteTextView."
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:text="누구신가요?"
+        tools:ignore="HardcodedText" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_student"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/img_student"
+            app:layout_constraintTop_toTopOf="@+id/layout"
+            app:layout_constraintBottom_toBottomOf="@+id/layout"
+            app:layout_constraintLeft_toLeftOf="@+id/layout"
+            app:layout_constraintRight_toLeftOf="@+id/btn_teacher"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/btn_teacher"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/img_teacher"
+            app:layout_constraintTop_toTopOf="@+id/layout"
+            app:layout_constraintBottom_toBottomOf="@+id/layout"
+            app:layout_constraintRight_toRightOf="@+id/layout"
+            app:layout_constraintLeft_toRightOf="@+id/btn_student"
+            tools:ignore="ContentDescription" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

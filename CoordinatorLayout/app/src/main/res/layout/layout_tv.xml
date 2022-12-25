@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="text"
+            type="com.example.coordinatorlayout.Text" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_sign_up"
+        app:layout_constraintBottom_toTopOf="@+id/tvText"
+        app:layout_constraintLeft_toLeftOf="@+id/tvText"
+        style="@style/Base.ThemeOverlay.Material3.AutoCompleteTextView."
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:text="회원가입"/>
+
+    <TextView
+        android:id="@+id/tvText"
+        app:layout_constraintBottom_toTopOf="@+id/edit_first"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintLeft_toLeftOf="@+id/edit_first"
+        style="@style/Base.ThemeOverlay.Material3.AutoCompleteTextView."
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:text="@{text.tvScreenTips}"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_first"
+            android:hint="@{text.editFirst}"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/edit_second"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_first"
+            android:text="@{text.tvFirst}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/edit_first"
+            app:layout_constraintLeft_toLeftOf="@+id/edit_first" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_second"
+            android:hint="@{text.editSecond}"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/tv_second"
+            android:text="@{text.tvSecond}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/edit_second"
+            app:layout_constraintLeft_toLeftOf="@+id/edit_second" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_third"
+            android:hint="@{text.editThird}"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/edit_second"
+            android:layout_marginTop="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_third"
+            android:text="@{text.tvThird}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/edit_third"
+            app:layout_constraintLeft_toLeftOf="@+id/edit_third" />
+
+
+        <Button
+            android:id="@+id/btn_move"
+            android:textColor="@color/white"
+            android:text="@{text.btn}"
+            android:textStyle="bold"
+            android:layout_width="360dp"
+            android:layout_height="56dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_third"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/rounded_corner"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
