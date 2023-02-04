@@ -1,5 +1,8 @@
-package domain.repository
+package data.repository
+
+import data.model.LoginParam
 
 interface LoginRepository {
-    var autoLogin : Boolean
+    suspend fun login(param: LoginParam)
 }
+
