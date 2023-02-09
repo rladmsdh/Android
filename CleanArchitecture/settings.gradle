@@ -16,3 +16,4 @@ rootProject.name = "CleanArchitecture"
 include ':data'
 include ':domain'
 include ':presentation'
+include ':presentation_compose'
