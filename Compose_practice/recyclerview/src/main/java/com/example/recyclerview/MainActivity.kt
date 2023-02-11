@@ -23,9 +23,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            RecyclerviewTheme {
-                MyRecyclerview()
-            }
+            RecyclerviewTheme { MyRecyclerview() }
         }
     }
 }
@@ -35,21 +33,14 @@ class MainActivity : ComponentActivity() {
 fun MyRecyclerview(){
     Scaffold(
         backgroundColor = MaterialTheme.colors.background
-    ) {
-        RecyclerViewContent()
-    }
+    ) { RecyclerViewContent() }
 }
 
 @Composable
 fun RecyclerViewContent() {
-    val puppies = remember {
-        DataProvider.puppyList
-    }
+    val puppies = remember { DataProvider.puppyList }
     LazyColumn(contentPadding = PaddingValues(16.dp,8.dp)){
-        items(
-            items =puppies,
-            itemContent = {PuppyListItem(it)}
-        )
+        items(items =puppies, itemContent = {PuppyListItem(it)})
     }
 }
 
@@ -61,9 +52,7 @@ fun PuppyListItem(puppy: Puppy) {
         .padding(0.dp, 12.dp),
         elevation = 4.dp,
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
-        onClick = {
-            Log.d("onClick",puppy.name)
-        }
+        onClick = { Log.d("onClick",puppy.name) }
         ) {
             Column(
                modifier = Modifier
@@ -78,7 +67,5 @@ fun PuppyListItem(puppy: Puppy) {
 @Preview
 @Composable
 fun MyappPreview(){
-    RecyclerviewTheme {
-        MyRecyclerview()
-    }
+    RecyclerviewTheme { MyRecyclerview() }
 }
