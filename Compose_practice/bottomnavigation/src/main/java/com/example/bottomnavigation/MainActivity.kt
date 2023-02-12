@@ -15,43 +15,50 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
 class MainActivity : ComponentActivity() {
-    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
-            Scaffold(
-                bottomBar = {
-                    BottomNavigationBar(
-                        items = listOf(
-                            BottomNavItem(
-                                name = "Fist",
-                                route = "first",
-                            ),
-                            BottomNavItem(
-                                name = "Second",
-                                route = "second",
-                            )
-                        ),
-                        navController = navController,
-                        onItemClick = {
-                            navController.navigate(it.route)
-                        }
-                    )
-                }
-            ) {
-                Navigation(navController = navController)
-            }
+            NavigationView()
         }
+    }
+}
+
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Composable
+fun NavigationView(){
+    val navController = rememberNavController()
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(
+                items = listOf(
+                    BottomNavItem(
+                        name = "Fist",
+                        route = "first",
+                    ),
+                    BottomNavItem(
+                        name = "Second",
+                        route = "second",
+                    )
+                ),
+                navController = navController,
+                onItemClick = {
+                    navController.navigate(it.route)
+                }
+            )
+        }
+    ) {
+        Navigation(navController = navController)
     }
 }
 
@@ -125,4 +132,10 @@ fun SecondScreen(){
         Button(onClick = { Log.d("screen","second")}) {
         }
     }
+}
+
+@Composable
+@Preview
+fun PreviewNavigation(){
+    NavigationView()
 }
