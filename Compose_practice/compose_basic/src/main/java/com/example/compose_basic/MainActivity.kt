@@ -1,20 +1,16 @@
 package com.example.compose_basic
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -35,9 +31,15 @@ class MainActivity : ComponentActivity() {
             Theme {
                 //TextExample(name = "Android")
 
-                ButtonExample (onButtonClicked = {
-                    Toast.makeText(this@MainActivity,"clicked",Toast.LENGTH_SHORT).show()
-                })
+//                ButtonExample (onButtonClicked = {
+//                    Toast.makeText(this@MainActivity,"clicked",Toast.LENGTH_SHORT).show()
+//                })
+
+//                ModifierExample (onButtonClicked = {
+//                    Toast.makeText(this@MainActivity,"clicked",Toast.LENGTH_SHORT).show()
+//                })
+
+                SurfaceExample(name = "Android")
             }
         }
     }
@@ -74,10 +76,63 @@ fun ButtonExample(onButtonClicked : () -> Unit) {
     }
 }
 
+//
+@Composable
+fun ModifierExample(onButtonClicked: () -> Unit) {
+    Button(
+        onClick = onButtonClicked,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color.White,
+            contentColor = Color.Black,
+        ),
+        modifier = Modifier
+            .size(200.dp, 100.dp)
+            .padding(30.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Filled.Search,
+            contentDescription = null,
+        )
+        Spacer(
+            modifier = Modifier
+                .size(ButtonDefaults.IconSpacing)
+        )
+        Text(
+            text = "Search",
+            modifier = Modifier
+                .offset(x = 5.dp)
+        )
+    }
+}
+
+//Material 디자인의 기본적인 패턴
+@Composable
+fun SurfaceExample(name : String) {
+    Surface(
+        border = BorderStroke(
+            width = 1.dp,
+            color = Color.Black,
+        ),
+        modifier = Modifier.padding(5.dp),
+        elevation = 10.dp,
+        shape = CircleShape,
+        color = MaterialTheme.colors.surface
+    ) {
+        Text(
+            text = "Hello $name",
+            modifier = Modifier.padding(8.dp),
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
     //TextExample(name = "Android")
 
-    ButtonExample(onButtonClicked = {})
+    //ButtonExample(onButtonClicked = {})
+
+    //ModifierExample(onButtonClicked = {})
+
+    SurfaceExample(name = "Android")
 }
