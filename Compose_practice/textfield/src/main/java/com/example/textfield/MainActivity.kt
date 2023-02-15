@@ -7,8 +7,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,11 +25,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TextFieldScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
-        var text = remember {
-            mutableStateOf("")
-        }
-        TextField(value = text.value,
+        var text = remember { mutableStateOf("") }
+        OutlinedTextField(
+            value = text.value,
             onValueChange = {fieldValue -> text.value = fieldValue },
+            label ={ Text("에딧텍스트") }
         )
         Button(onClick = { Log.d("text",text.value) }) {
             Text(text = "버튼")
@@ -38,7 +38,7 @@ fun TextFieldScreen() {
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun TextFieldPreview(){
     TextFieldScreen()
 }
