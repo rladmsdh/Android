@@ -1,7 +1,8 @@
 package com.example.scaffold
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -23,11 +24,12 @@ import com.example.scaffold.ui.theme.ComposePracticeTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val intent = Intent(this@MainActivity,LoginActivity::class.java)
         setContent {
             ComposePracticeTheme {
                 ScaffoldExample(
                     onClicked = {
-                        Toast.makeText(this@MainActivity,"compose",Toast.LENGTH_SHORT).show()
+                        startActivity(intent)
                 })
             }
         }
@@ -52,11 +54,12 @@ fun CheckboxWithContent(
     }
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ScaffoldExample(onClicked : () -> Unit) {
     var checked1 by remember { mutableStateOf(false) }
     var checked2 by remember { mutableStateOf(false) }
-    
+
     Scaffold( topBar = {
             TopAppBar(
                 navigationIcon = {
@@ -68,12 +71,12 @@ fun ScaffoldExample(onClicked : () -> Unit) {
             )
         }) {
         Scaffold(modifier = Modifier.padding(8.dp)) {
-            Column() {
+            Column {
                 CheckboxWithContent(checked = checked1, toggleState = { checked1 = !checked1 }) {
                     Text(text = "컴포즈를 좋아한다.")
                  }
                 CheckboxWithContent(checked = checked2, toggleState = { checked2 = !checked2 }) {
-                    Text(text = "컴포즈를 좋아한다.asd")
+                    Text(text = "컴포즈를 좋아한다.2")
                  }
             }
         }
