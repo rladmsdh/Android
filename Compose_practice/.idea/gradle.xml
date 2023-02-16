@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/slotapi" />
             <option value="$PROJECT_DIR$/textfield" />
             <option value="$PROJECT_DIR$/todolist" />
+            <option value="$PROJECT_DIR$/webview" />
           </set>
         </option>
       </GradleProjectSettings>
