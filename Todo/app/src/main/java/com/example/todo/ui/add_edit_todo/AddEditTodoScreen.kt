@@ -43,13 +43,13 @@ fun AddEditTodoScreen(
 
     mCalendar.time = Date()
 
-    val mDate = remember { mutableStateOf("") }
+    //val mDate = remember { mutableStateOf("") }
 
     val mDatePickerDialog = DatePickerDialog(
         mContext,
         { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-            mDate.value = "$mDayOfMonth/${mMonth+1}/$mYear"
-        }, mYear, mMonth, mDay
+            viewModel.date = "$mDayOfMonth/${mMonth+1}/$mYear"
+        }, mYear,mMonth,mDay
     )
 
     LaunchedEffect(key1 = true){

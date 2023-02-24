@@ -24,11 +24,17 @@ fun TodoItem(
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.Center) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = todo.title,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                Row{
+                    Text(
+                        text = todo.title,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = todo.date,
+                        fontSize = 20.sp,
+                    )
+                }
                 Spacer(modifier = Modifier.width(8.dp))
                 IconButton(onClick = {
                     onEvent(TodoListEvent.OnDeleteTodoClick(todo))

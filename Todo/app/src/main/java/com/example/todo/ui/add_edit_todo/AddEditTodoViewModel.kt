@@ -29,6 +29,8 @@ class AddEditTodoViewModel @Inject constructor(
     var description by mutableStateOf("")
     private set
 
+    var date by mutableStateOf("")
+
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
@@ -39,6 +41,7 @@ class AddEditTodoViewModel @Inject constructor(
                 repository.getTodoById(todoId)?.let { todo ->
                     title = todo.title
                     description = todo.description?: ""
+                    date = todo.date
                     this@AddEditTodoViewModel.todo = todo
                 }
             }
@@ -53,6 +56,9 @@ class AddEditTodoViewModel @Inject constructor(
             is AddEditTodoEvent.OnDescriptionChange -> {
                 description = event.description
             }
+            is AddEditTodoEvent.OnDateChange -> {
+                date = event.date
+            }
             is AddEditTodoEvent.OnSaveTodoClick -> {
                 viewModelScope.launch {
                     if(title.isBlank()){
@@ -65,6 +71,7 @@ class AddEditTodoViewModel @Inject constructor(
                         Todo(
                             title=title,
                             description=description,
+                            date=date,
                             isDone = todo?.isDone?:false,
                             id = todo?.id
                         )
