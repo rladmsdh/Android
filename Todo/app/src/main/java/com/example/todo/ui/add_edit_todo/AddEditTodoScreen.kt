@@ -11,11 +11,10 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.todo.util.UiEvent
@@ -43,12 +42,10 @@ fun AddEditTodoScreen(
 
     mCalendar.time = Date()
 
-    //val mDate = remember { mutableStateOf("") }
-
     val mDatePickerDialog = DatePickerDialog(
         mContext,
         { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-            viewModel.date = "$mDayOfMonth/${mMonth+1}/$mYear"
+            viewModel.date = "$mYear/${mMonth+1}/$mDayOfMonth"
         }, mYear,mMonth,mDay
     )
 
@@ -74,19 +71,23 @@ fun AddEditTodoScreen(
                         Image(imageVector = Icons.Default.DateRange, contentDescription = "달력")
                     }
                 },
-                title = { Text(text = "Todo")},
-                backgroundColor = Color.White
+                title = { Text(text = "New Reminders",color= Color.White, fontWeight = FontWeight.Bold)},
+                backgroundColor = Color.LightGray,
             )},
         scaffoldState = scaffoldState,
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         floatingActionButton ={
-            FloatingActionButton(onClick = {
-                viewModel.onEvent(AddEditTodoEvent.OnSaveTodoClick)
-            }) {
-                Icon(imageVector = Icons.Default.Check, contentDescription = "Save")
-        }
+            FloatingActionButton(onClick = { viewModel.onEvent(AddEditTodoEvent.OnSaveTodoClick) },
+                backgroundColor = Color.LightGray
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Check,
+                    contentDescription = "Save",
+                    tint = Color.White
+                )
+            }
         }
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
@@ -94,7 +95,11 @@ fun AddEditTodoScreen(
                 value = viewModel.title,
                 onValueChange = {viewModel.onEvent(AddEditTodoEvent.OnTitleChange(it))},
                 placeholder = { Text(text = "Title")},
-                modifier = Modifier.fillMaxWidth())
+                modifier = Modifier.fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = MaterialTheme.colors.surface.copy(alpha = 0.3f)
+                )
+            )
                 Spacer(modifier = Modifier.height(8.dp))
             TextField(
                 value = viewModel.description,
@@ -104,7 +109,10 @@ fun AddEditTodoScreen(
                 placeholder = { Text(text = "Description") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = false,
-                maxLines = 5
+                maxLines = 5,
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = MaterialTheme.colors.surface.copy(alpha = 0.3f)
+                )
             )
         }
     }

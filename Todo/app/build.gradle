@@ -84,6 +84,8 @@ dependencies {
     def coroutines ="1.6.1"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    // system bars customization
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
 }
 kapt {
     correctErrorTypes true
