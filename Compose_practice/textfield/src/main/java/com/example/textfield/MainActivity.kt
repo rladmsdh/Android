@@ -1,21 +1,24 @@
 package com.example.textfield
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Button
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TextFieldScreen()
+            //TextFieldScreen()
+            LaunchedEffectScreen()
         }
     }
 }
@@ -62,4 +65,26 @@ fun TextFieldWithSlot(
 @Preview(showBackground = true)
 fun TextFieldPreview(){
     TextFieldScreen()
+}
+
+
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Composable
+fun LaunchedEffectScreen() {
+    val scaffoldState = rememberScaffoldState()
+    var text by rememberSaveable { mutableStateOf("") }
+
+    LaunchedEffect(text){
+        scaffoldState.snackbarHostState.showSnackbar(
+            message = "text is $text"
+        )
+    }
+
+    Scaffold(
+        scaffoldState = scaffoldState
+    ) {
+        Column(modifier = androidx.compose.ui.Modifier.padding(16.dp)) {
+            OutlinedTextField(value = text, onValueChange = {text = it})
+        }
+    }
 }
