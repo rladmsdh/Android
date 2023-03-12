@@ -17,4 +17,5 @@ interface TodoDao {
 
     @Query("SELECT *FROM todo")
     fun getTodos() : Flow<List<Todo>>
+
 }

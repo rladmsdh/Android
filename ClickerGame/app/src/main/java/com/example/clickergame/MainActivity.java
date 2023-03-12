@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 tvResult.setText(String.valueOf(result));
             }
         });
+
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

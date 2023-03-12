@@ -68,12 +68,12 @@ class MainActivity : ComponentActivity() {
 //                CoilExample()
 
             //profileCard
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colors.background
-//                ) {
-//                    CardExample(cardData = cardData)
-//                }
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    CardExample(cardData = cardData)
+                }
             }
         }
     }
@@ -287,7 +287,6 @@ fun CoilExample() {
 @Composable
 fun CardExample(cardData: CardData) {
     val placeholderColor = Color(0x33000000)
-
     Card(
         elevation = 8.dp,
         modifier = Modifier.padding(4.dp)
@@ -337,5 +336,5 @@ fun Preview() {
 
     //ImageExample()
 
-    //CardExample(MainActivity.cardData)
+    CardExample(MainActivity.cardData)
 }

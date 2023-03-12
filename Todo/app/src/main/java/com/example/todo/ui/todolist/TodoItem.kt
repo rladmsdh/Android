@@ -34,6 +34,7 @@ fun TodoItem(
                     Text(
                         text = todo.date,
                         fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
                     )
                 }
                 Spacer(modifier = Modifier.width(8.dp))
