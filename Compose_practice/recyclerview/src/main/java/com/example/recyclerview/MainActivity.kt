@@ -40,7 +40,10 @@ fun MyRecyclerview(){
 fun RecyclerViewContent() {
     val puppies = remember { DataProvider.puppyList }
     LazyColumn(contentPadding = PaddingValues(16.dp,8.dp)){
-        items(items =puppies, itemContent = {PuppyListItem(it)})
+        items(
+            items =puppies,
+            itemContent = { PuppyListItem(it) },
+        )
     }
 }
 

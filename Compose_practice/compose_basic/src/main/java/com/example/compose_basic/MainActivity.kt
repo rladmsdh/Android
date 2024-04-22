@@ -1,17 +1,36 @@
 package com.example.compose_basic
 
+import android.os.Build
 import android.os.Bundle
-import android.os.Parcel
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Search
@@ -21,10 +40,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.painter.ColorPainter
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -35,15 +59,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import com.example.compose_basic.ui.theme.Theme
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Theme {
-//                TextExample(name = "Android")
+//                Loading()
 
 //                ButtonExample (onButtonClicked = {
 //                    Toast.makeText(this@MainActivity,"clicked",Toast.LENGTH_SHORT).show()
@@ -67,18 +91,21 @@ class MainActivity : ComponentActivity() {
 
 //                CoilExample()
 
-            //profileCard
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    CardExample(cardData = cardData)
-                }
+//                Surface(
+//                    modifier = Modifier.size(100.dp),
+//                    color = MaterialTheme.colors.background
+//                ) {
+//                    //CardExample(cardData = cardData)
+//                    Logo()
+//                }
+//                Watch()
+
             }
         }
     }
+
     //cardexample
-    companion object{
+    companion object {
         val cardData = CardData(
             imageUri = "https://raw.githubusercontent.com/Fastcampus-Android-Lecture-Project-2023/part4-chapter3/main/part-chapter3-10/app/src/main/res/drawable-hdpi/wall.jpg",
             imageDescription = "엔텔로프 캐년",
@@ -90,22 +117,39 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TextExample(name: String) {
-    Text(
-        modifier = Modifier.size(300.dp),
-        color = Color.Red,
-        text = "Hello $name\nHello $name",
-        fontSize = 30.sp,
-        fontWeight = FontWeight.Bold,
-        fontFamily = FontFamily.Cursive,
-        maxLines = 2,
-        textDecoration = TextDecoration.Underline,
-        textAlign = TextAlign.Center,
-        letterSpacing = 2.sp,
-    )
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF00ACC1)),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            modifier = Modifier
+                .background(Color.White)
+                .padding(end = 10.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .size(250.dp),
+            color = Color.Red,
+            text = "Hello $name\nHello $name",
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily.Cursive,
+            maxLines = 2,
+            textDecoration = TextDecoration.Underline,
+            textAlign = TextAlign.Center,
+            letterSpacing = 2.sp,
+        )
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(Color.Yellow)
+        )
+    }
 }
 
 @Composable
-fun ButtonExample(onButtonClicked : () -> Unit) {
+fun ButtonExample(onButtonClicked: () -> Unit) {
     Button(
         onClick = onButtonClicked,
         border = BorderStroke(1.dp, Color.Black),
@@ -150,7 +194,7 @@ fun ModifierExample(onButtonClicked: () -> Unit) {
 
 //Material 디자인의 기본적인 패턴
 @Composable
-fun SurfaceExample(name : String) {
+fun SurfaceExample(name: String) {
     Surface(
         border = BorderStroke(
             width = 1.dp,
@@ -244,7 +288,7 @@ fun Outer() {
 @Composable
 private fun Inner(modifier: Modifier = Modifier) {
     BoxWithConstraints((modifier)) {
-        if (maxHeight >= 150.dp){
+        if (maxHeight >= 150.dp) {
             Text(
                 text = "길다",
                 modifier = Modifier.align(Alignment.BottomEnd)
@@ -278,8 +322,8 @@ fun CoilExample() {
             contentDescription = "엔텔로프 캐년"
         )
         AsyncImage(
-                model = "https://raw.githubusercontent.com/Fastcampus-Android-Lecture-Project-2023/part4-chapter3/main/part-chapter3-10/app/src/main/res/drawable-hdpi/wall.jpg",
-        contentDescription = "엔텔로프 캐년"
+            model = "https://raw.githubusercontent.com/Fastcampus-Android-Lecture-Project-2023/part4-chapter3/main/part-chapter3-10/app/src/main/res/drawable-hdpi/wall.jpg",
+            contentDescription = "엔텔로프 캐년"
         )
     }
 }
@@ -290,7 +334,7 @@ fun CardExample(cardData: CardData) {
     Card(
         elevation = 8.dp,
         modifier = Modifier.padding(4.dp)
-    ){
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(8.dp)
@@ -315,6 +359,49 @@ fun CardExample(cardData: CardData) {
     }
 }
 
+@Composable
+fun Logo() {
+    Canvas(
+        modifier = Modifier
+            .size(100.dp)
+            .padding(16.dp)
+    ) {
+        drawCircle(
+            color = Color(0xFF0091F2),
+            radius = 30f,
+            center = Offset(size.width * .25f, size.height * .05f),
+        )
+
+        rotate(degrees = 50F) {
+            drawRoundRect(
+                color = Color(0XFF00C3C3),
+                size = Size(50f, 50f),
+                topLeft = Offset(x = size.width * .25f, y = size.height * .05f),
+                cornerRadius = CornerRadius(2f, 2f)
+            )
+        }
+
+        drawPath(
+            path = Path().apply {
+                moveTo(size.width * .35f, size.height * .25f)
+                lineTo(size.width * .28f, size.height * .58f)
+                lineTo(size.width * .60f, size.height * .50f)
+                close()
+            },
+            color = Color(0xFFE97BBC),
+        )
+
+        drawArc(
+            color = Color(0XFF00C379),
+            startAngle = 360f,
+            sweepAngle = 180f,
+            useCenter = false,
+            size = Size(size.width - 10f, size.height - 10f),
+            style = Stroke(width = 45f, cap = StrokeCap.Square)
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
@@ -336,5 +423,14 @@ fun Preview() {
 
     //ImageExample()
 
-    CardExample(MainActivity.cardData)
+    //CardExample(MainActivity.cardData)
+
+    //Logo()
+
+    Clock(
+        modifier = Modifier.size(300.dp),
+        hour = 2,
+        minute = 20,
+        second = 30,
+    )
 }

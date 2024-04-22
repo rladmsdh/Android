@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            //TextFieldScreen()
+            TextFieldScreen()
             LaunchedEffectScreen()
         }
     }
@@ -51,7 +51,7 @@ fun TextFieldWithSlot(
     Column {
         OutlinedTextField(
             value = text.value,
-            onValueChange = {fieldValue -> text.value = fieldValue },
+            onValueChange = { fieldValue -> text.value = fieldValue },
             label = label
         )
         Button(onClick = clicked) {
